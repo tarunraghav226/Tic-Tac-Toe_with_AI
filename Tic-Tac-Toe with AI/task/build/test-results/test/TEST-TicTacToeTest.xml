@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-09-21T15:44:34" hostname="ProgrammersZone" time="0.042">
+<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-09-21T16:01:49" hostname="ProgrammersZone" time="0.142">
   <properties/>
-  <testcase name="start" classname="TicTacToeTest" time="0.042"/>
-  <system-out><![CDATA[XXX
-XXX
-XXX
+  <testcase name="start" classname="TicTacToeTest" time="0.142"/>
+  <system-out><![CDATA[---------
+| O   O |
+| X X O |
+|   X X |
+---------
+---------
+| O X O |
+|     X |
+|   O X |
+---------
+---------
+|       |
+|       |
+|       |
+---------
+---------
+|   O   |
+|   X   |
+|     X |
+---------
 ]]></system-out>
   <system-err><![CDATA[Start test 1
+Start test 2
+Start test 3
+Start test 4
 ]]></system-err>
 </testsuite>
