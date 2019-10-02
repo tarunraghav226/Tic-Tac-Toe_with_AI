@@ -31,4 +31,9 @@ public class Main {
         }
         return "None";
     }
+    public String checkDraw(){
+        if(pattern.indexOf(' ')==-1)
+            return "Draw";
+        return "None";
+    }
 }

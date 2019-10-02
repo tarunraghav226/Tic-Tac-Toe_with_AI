@@ -6,7 +6,14 @@ public class ExecutionClass {
         String pattern=scan.nextLine().trim();
         Main game = new Main(pattern);
         System.out.println(game.displaGame());
-        System.out.println(game.checkWinState());
+        String stateOfGame=game.checkWinState();
+
+        if(stateOfGame.compareTo("None")!=0)
+            System.out.println(stateOfGame);
+        else if(game.checkDraw().compareTo("Draw")==0)
+                System.out.println("Draw");
+             else
+                 System.out.println("Game not finished");
         scan.close();
     }
 }
