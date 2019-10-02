@@ -497,7 +497,7 @@
                       <option name="index" value="3" />
                       <option name="name" value="Print the game state" />
                       <option name="record" value="-1" />
-                      <option name="status" value="Unchecked" />
+                      <option name="status" value="Failed" />
                       <option name="files">
                         <map>
                           <entry key="test/TicTacToeTest.java">
@@ -522,20 +522,6 @@
                                 </option>
                                 <option name="highlightErrors" value="true" />
                                 <option name="name" value="src/tictactoe/Main.java" />
-                                <option name="text" value="package tictactoe;&#10;&#10;public class Main {&#10;    public static void main(String[] args) {&#10;        System.out.println(&quot;Hello World!&quot;);&#10;    }&#10;}&#10;" />
-                                <option name="trackChanges" value="true" />
-                                <option name="visible" value="true" />
-                              </TaskFile>
-                            </value>
-                          </entry>
-                          <entry key="src/tictactoe/ExecutionClass.java">
-                            <value>
-                              <TaskFile>
-                                <option name="answerPlaceholders">
-                                  <list />
-                                </option>
-                                <option name="highlightErrors" value="true" />
-                                <option name="name" value="src/tictactoe/ExecutionClass.java" />
                                 <option name="text" value="" />
                                 <option name="trackChanges" value="true" />
                                 <option name="visible" value="true" />
@@ -550,20 +536,6 @@
                                 </option>
                                 <option name="highlightErrors" value="false" />
                                 <option name="name" value="src/tictactoe/Main.class" />
-                                <option name="text" value="" />
-                                <option name="trackChanges" value="true" />
-                                <option name="visible" value="true" />
-                              </TaskFile>
-                            </value>
-                          </entry>
-                          <entry key="src/tictactoe/ExecutionClass.class">
-                            <value>
-                              <TaskFile>
-                                <option name="answerPlaceholders">
-                                  <list />
-                                </option>
-                                <option name="highlightErrors" value="false" />
-                                <option name="name" value="src/tictactoe/ExecutionClass.class" />
                                 <option name="text" value="" />
                                 <option name="trackChanges" value="true" />
                                 <option name="visible" value="true" />
