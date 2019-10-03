@@ -41,6 +41,15 @@ public class Main {
         return "None";
     }
 
+    public int numberOfOccurenceOf(char c) {
+        int occurence = 0;
+        for (int i = 0; i < pattern.length(); i++) {
+            if (pattern.charAt(i) == c)
+                occurence++;
+        }
+        return occurence;
+    }
+
     public static void main(String[] args) {
         Scanner scan =new Scanner(System.in);
         String pattern=scan.nextLine().trim();
