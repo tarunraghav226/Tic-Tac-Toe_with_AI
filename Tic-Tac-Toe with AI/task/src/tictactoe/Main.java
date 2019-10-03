@@ -23,22 +23,59 @@ public class Main {
             return "Draw";
         return "None";
     }
-    public String checkWinState(){
-        int [][]a={
-                {1,2,3},
-                {4,5,6},
-                {7,8,9},
-                {1,5,9},
-                {3,5,7},
-                {1,4,7},
-                {2,5,8},
-                {3,6,9}
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        String pattern = scan.nextLine().trim();
+        Main game = new Main(pattern);
+        System.out.println(game.displaGame());
+        String stateOfGame = game.checkWinState();
+
+        if (stateOfGame.compareTo("None") != 0)
+            System.out.println(stateOfGame);
+        else if (game.checkDraw().compareTo("Draw") == 0)
+            System.out.println("Draw");
+        else
+            System.out.println("Game not finished");
+
+        scan.close();
+    }
+
+    public String checkWinState() {
+        int[][] a = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9},
+                {1, 5, 9},
+                {3, 5, 7},
+                {1, 4, 7},
+                {2, 5, 8},
+                {3, 6, 9}
         };
-        for(int i=0;i<8;i++){
-            if(pattern.charAt(a[i][0])==pattern.charAt(a[i][1])&&pattern.charAt(a[i][1])==pattern.charAt(a[i][2]))
-                return pattern.charAt(a[i][0])+" wins";
+        for (int i = 0; i < 8; i++) {
+            if (pattern.charAt(a[i][0]) == pattern.charAt(a[i][1]) && pattern.charAt(a[i][1]) == pattern.charAt(a[i][2]))
+                return pattern.charAt(a[i][0]) + " wins";
         }
         return "None";
+    }
+
+    public boolean checkWinState(char c) {
+        int[][] a = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9},
+                {1, 5, 9},
+                {3, 5, 7},
+                {1, 4, 7},
+                {2, 5, 8},
+                {3, 6, 9}
+        };
+        for (int i = 0; i < 8; i++) {
+            if (pattern.charAt(a[i][0]) == pattern.charAt(a[i][1]) && pattern.charAt(a[i][1]) == pattern.charAt(a[i][2]) && pattern.charAt(a[i][0]) == c)
+                return true;
+        }
+        return false;
     }
 
     public int numberOfOccurenceOf(char c) {
@@ -48,22 +85,5 @@ public class Main {
                 occurence++;
         }
         return occurence;
-    }
-
-    public static void main(String[] args) {
-        Scanner scan =new Scanner(System.in);
-        String pattern=scan.nextLine().trim();
-        Main game = new Main(pattern);
-        System.out.println(game.displaGame());
-        String stateOfGame=game.checkWinState();
-
-        if(stateOfGame.compareTo("None")!=0)
-            System.out.println(stateOfGame);
-        else if(game.checkDraw().compareTo("Draw")==0)
-                System.out.println("Draw");
-             else
-                 System.out.println("Game not finished");
-
-        scan.close();
     }
 }
