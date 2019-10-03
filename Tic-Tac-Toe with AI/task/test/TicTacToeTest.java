@@ -9,13 +9,15 @@ import java.util.stream.Collectors;
 
 
 class Attach {
-    String input;
-    String result;
+    String inputField;
+    String outField;
 
-    Attach(String result) {
-        this.result = result;
+    Attach(String inputField, String outField) {
+        this.inputField = inputField;
+        this.outField = outField;
     }
 }
+
 
 enum FieldState {
     X, O, FREE;
@@ -195,49 +197,52 @@ public class TicTacToeTest extends BaseStageTest<Attach> {
         super(Main.class);
     }
 
-
     @Override
     public List<TestCase<Attach>> generate() {
-        List<TestCase<Attach>> tests = List.of(
+        return List.of(
             new TestCase<Attach>()
-                .setInput("XXXOO  O ")
-                .setAttach(new Attach("X wins")),
+                .setInput("\"X X O    \"\n1 2")
+                .setAttach(new Attach(
+                    "\"X X O    \"",
+                     "\"X XXO    \"")),
 
             new TestCase<Attach>()
-                .setInput("XOXOXOXXO")
-                .setAttach(new Attach("X wins")),
+                .setInput("\"X X O    \"\n1 1")
+                .setAttach(new Attach(
+                    "\"X X O    \"",
+                     "\"X X O X  \"")),
 
             new TestCase<Attach>()
-                .setInput("XOOOXOXXO")
-                .setAttach(new Attach("O wins")),
+                .setInput("\"X X O    \"\n3 2")
+                .setAttach(new Attach(
+                    "\"X X O    \"",
+                     "\"X X OX   \"")),
 
             new TestCase<Attach>()
-                .setInput("XOXOOXXXO")
-                .setAttach(new Attach("Draw")),
+                .setInput("\"X X O    \"\n2 1")
+                .setAttach(new Attach(
+                    "\"X X O    \"",
+                     "\"X X O  X \"")),
 
             new TestCase<Attach>()
-                .setInput("XO OOX X ")
-                .setAttach(new Attach("Game not finished")),
+                .setInput("\" XXOO OX \"\n1 3")
+                .setAttach(new Attach(
+                    "\" XXOO OX \"",
+                     "\"XXXOO OX \"")),
 
             new TestCase<Attach>()
-                .setInput("XO XO XOX")
-                .setAttach(new Attach("Impossible")),
+                .setInput("\" XXOO OX \"\n3 1")
+                .setAttach(new Attach(
+                    "\" XXOO OX \"",
+                     "\" XXOO OXX\"")),
 
             new TestCase<Attach>()
-                .setInput(" O X  X X")
-                .setAttach(new Attach("Impossible")),
+                .setInput("\" XXOO OX \"\n3 2")
+                .setAttach(new Attach(
+                    "\" XXOO OX \"",
+                     "\" XXOOXOX \""))
 
-            new TestCase<Attach>()
-                .setInput(" OOOO X X")
-                .setAttach(new Attach( "Impossible"))
         );
-
-        for (TestCase<Attach> test : tests) {
-            test.setInput("\"" + test.getInput() + "\"");
-            test.getAttach().input = test.getInput();
-        }
-
-        return tests;
     }
 
     @Override
@@ -245,53 +250,25 @@ public class TicTacToeTest extends BaseStageTest<Attach> {
 
         List<TicTacToeField> fields = TicTacToeField.parseAll(reply);
 
-        if (fields.size() == 0) {
+        if (fields.size() != 2) {
             return new CheckResult(false,
-                "Can't parse the field! " +
-                    "Check if you output a field in format like in the example.");
+                "You should output exactly 2 fields, found: " + fields.size());
         }
 
-        if (fields.size() > 1) {
+        TicTacToeField curr = fields.get(0);
+        TicTacToeField next = fields.get(1);
+
+        TicTacToeField correctCurr = new TicTacToeField(clue.inputField);
+        TicTacToeField correctNext = new TicTacToeField(clue.outField);
+
+        if (!curr.equalTo(correctCurr)) {
             return new CheckResult(false,
-                "There are more than one field in the output! " +
-                    "You should output a single field.");
+                "The first field is not equal to the input field");
         }
 
-        TicTacToeField userField = fields.get(0);
-        TicTacToeField inputField = new TicTacToeField(clue.input);
-
-        if (!userField.equalTo(inputField)) {
+        if (!next.equalTo(correctNext)) {
             return new CheckResult(false,
-                "Your field doesn't match expected field");
-        }
-
-        List<String> lines = reply
-            .strip()
-            .lines()
-            .map(String::strip)
-            .filter(e -> e.length() > 0)
-            .collect(Collectors.toList());
-
-        String lastLine = lines.get(lines.size() - 1);
-
-        if (! (lastLine.equals("X wins")
-                || lastLine.equals("O wins")
-                || lastLine.equals("Draw")
-                || lastLine.equals("Game not finished")
-                || lastLine.equals("Impossible")
-        )) {
-            return new CheckResult(false,
-                "Can't parse result, " +
-                    "should be one of the outcomes mentioned in description. " +
-                    "Your last line: \"" + lastLine + "\"");
-        }
-
-        if (!lastLine.equals(clue.result)) {
-            return new CheckResult(false,
-                "The result is incorrect. " +
-                    "Should be: \"" + clue.result + "\", " +
-                    "found: \"" + lastLine + "\". " +
-                    "Check if your program works correctly in test examples in description.");
+                "The first field is correct, but the second is not");
         }
 
         return CheckResult.TRUE;
