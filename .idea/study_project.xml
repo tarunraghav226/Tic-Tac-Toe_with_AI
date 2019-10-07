@@ -560,7 +560,7 @@
                       <option name="index" value="4" />
                       <option name="name" value="Create a human move" />
                       <option name="record" value="-1" />
-                      <option name="status" value="Unchecked" />
+                      <option name="status" value="Failed" />
                       <option name="files">
                         <map>
                           <entry key="test/TicTacToeTest.java">

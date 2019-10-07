@@ -78,6 +78,36 @@ public class Main {
         return occurence;
     }
 
+    //this function adds new user move to the game pattern
+    public int updateState(char choice,int move1,int move2){
+        int indexOfChoiceInPattern=(move1-1)+3*(3-move2)+1;
+
+        //condition for checking if the particular place is free or not for the move
+        if(pattern.charAt(indexOfChoiceInPattern)=='X' || pattern.charAt(indexOfChoiceInPattern)=='Y')
+            return 0;
+
+        //updating the game state
+        pattern=pattern.substring(1,indexOfChoiceInPattern)+choice+pattern.substring(indexOfChoiceInPattern+1);
+        pattern="\""+pattern;
+        return 1;
+
+    }
+
+    //function to print win state of game
+    public String printWinState(){
+        String stateOfGame = this.checkWinState();
+        if(Math.abs(this.numberOfOccurenceOf('X')-this.numberOfOccurenceOf('O'))>1)
+            return "Impossible";
+        else if(this.checkWinState('X')==true && this.checkWinState('O')==true)
+            return  "Impossible";
+        else if (stateOfGame.compareTo("None") != 0)
+            return stateOfGame;
+        else if (this.checkDraw().compareTo("Draw") == 0)
+            return "Draw";
+        else
+            return "Game not finished";
+    }
+
     //main method to execute code
     public static void main(String[] args) {
 
@@ -85,19 +115,13 @@ public class Main {
         String pattern = scan.nextLine().trim();
         Main game = new Main(pattern);
         System.out.println(game.displaGame());
-        String stateOfGame = game.checkWinState();
 
-        if(Math.abs(game.numberOfOccurenceOf('X')-game.numberOfOccurenceOf('O'))>1)
-                System.out.println("Impossible");
-             else if(game.checkWinState('X')==true && game.checkWinState('O')==true)
-                    System.out.println("Impossible");
-                  else if (stateOfGame.compareTo("None") != 0)
-                        System.out.println(stateOfGame);
-                       else if (game.checkDraw().compareTo("Draw") == 0)
-                            System.out.println("Draw");
-                       else
-                            System.out.println("Game not finished");
-
+        int c1,c2;
+        c1=scan.nextInt();
+        c2=scan.nextInt();
+        game.updateState('X',c1,c2);
+        System.out.println(game.displaGame());
+        //System.out.println(game.printWinState());
         scan.close();
     }
 }

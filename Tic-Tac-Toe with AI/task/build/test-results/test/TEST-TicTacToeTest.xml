@@ -1,55 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-10-03T14:17:01" hostname="ProgrammersZone" time="0.21">
+<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-10-07T14:22:19" hostname="ProgrammersZone" time="0.265">
   <properties/>
-  <testcase name="start" classname="TicTacToeTest" time="0.21"/>
+  <testcase name="start" classname="TicTacToeTest" time="0.265"/>
   <system-out><![CDATA[---------
-| X X X |
-| O O   |
+| X   X |
 |   O   |
+|       |
 ---------
-X wins
 ---------
-| X O X |
-| O X O |
-| X X O |
----------
-X wins
----------
-| X O O |
-| O X O |
-| X X O |
----------
-O wins
----------
-| X O X |
-| O O X |
-| X X O |
----------
-Draw
----------
+| X   X |
 | X O   |
-| O O X |
-|   X   |
+|       |
 ---------
-Game not finished
 ---------
-| X O   |
-| X O   |
-| X O X |
+| X   X |
+|   O   |
+|       |
 ---------
-Impossible
 ---------
+| X   X |
 |   O   |
 | X     |
+---------
+---------
 | X   X |
+|   O   |
+|       |
 ---------
-Impossible
 ---------
-|   O O |
+| X   X |
+|   O X |
+|       |
+---------
+---------
+| X   X |
+|   O   |
+|       |
+---------
+---------
+| X   X |
+|   O   |
+|   X   |
+---------
+---------
+|   X X |
 | O O   |
-| X   X |
+| O X   |
 ---------
-Impossible
+---------
+| X X X |
+| O O   |
+| O X   |
+---------
+---------
+|   X X |
+| O O   |
+| O X   |
+---------
+---------
+|   X X |
+| O O   |
+| O X X |
+---------
+---------
+|   X X |
+| O O   |
+| O X   |
+---------
+---------
+|   X X |
+| O O X |
+| O X   |
+---------
 ]]></system-out>
   <system-err><![CDATA[Start test 1
 Start test 2
@@ -58,6 +80,5 @@ Start test 4
 Start test 5
 Start test 6
 Start test 7
-Start test 8
 ]]></system-err>
 </testsuite>
