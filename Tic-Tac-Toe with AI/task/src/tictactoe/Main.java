@@ -1,5 +1,6 @@
 package tictactoe;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //Main Class for Game. All Methods are present in this class.
@@ -83,7 +84,7 @@ public class Main {
         int indexOfChoiceInPattern=(move1-1)+3*(3-move2)+1;
 
         //condition for checking if the particular place is free or not for the move
-        if(pattern.charAt(indexOfChoiceInPattern)=='X' || pattern.charAt(indexOfChoiceInPattern)=='Y')
+        if(pattern.charAt(indexOfChoiceInPattern)=='X' || pattern.charAt(indexOfChoiceInPattern)=='O')
             return 0;
 
         //updating the game state
@@ -117,10 +118,29 @@ public class Main {
         System.out.println(game.displaGame());
 
         int c1,c2;
-        c1=scan.nextInt();
-        c2=scan.nextInt();
-        game.updateState('X',c1,c2);
-        System.out.println(game.displaGame());
+        boolean flag=true;
+        while(flag) {
+            try {
+                System.out.print("Enter the coordinates: ");
+                c1 = scan.nextInt();
+                c2 = scan.nextInt();
+
+                if(c1>3 || c1<1 || c2>3||c2<1) {
+                    System.out.println("Coordinates should be from 1 to 3!");
+                    flag = true;
+                }
+                else if( game.updateState('X',c1,c2)==1){
+                    System.out.println(game.displaGame());
+                    flag=false;
+                }
+                else
+                    System.out.println("This cell is occupied! Choose another one!");
+
+            } catch (InputMismatchException e) {
+                System.out.println("You should enter numbers!");
+                scan.nextLine().trim();
+            }
+        }
         //System.out.println(game.printWinState());
         scan.close();
     }

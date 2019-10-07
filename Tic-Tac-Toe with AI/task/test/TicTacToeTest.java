@@ -165,12 +165,9 @@ class TicTacToeField {
 
 
 class Clue {
-    int x, y;
     String input;
-    Clue(String input, int x, int y) {
+    Clue(String input) {
         this.input = input;
-        this.x = x;
-        this.y = y;
     }
 }
 
@@ -179,8 +176,7 @@ public class TicTacToeTest extends BaseStageTest<Clue> {
         super(Main.class);
     }
 
-    // TODO: why if this field in not static then it is null, not String[]?
-    static final String[] inputs = new String[] {
+    static String[] inputs = new String[] {
         "1 1", "1 2", "1 3",
         "2 1", "2 2", "2 3",
         "3 1", "3 2", "3 3"
@@ -206,39 +202,22 @@ public class TicTacToeTest extends BaseStageTest<Clue> {
 
     @Override
     public List<TestCase<Clue>> generate() {
+        return List.of(
+            new TestCase<Clue>()
+                .setInput("\" XXOO OX \"")
+                .setAttach(new Clue(
+                    "\" XXOO OX \"")),
 
-        List<TestCase<Clue>> tests = new ArrayList<>();
+            new TestCase<Clue>()
+                .setInput("\"         \"")
+                .setAttach(new Clue(
+                    "\"         \"")),
 
-        int i = 0;
-
-        for (String startField : new String[] {
-            "\" XXOO OX \"",
-            "\"         \"",
-            "\"X X O    \""
-        }) {
-
-            for (String input : inputs) {
-                String fullInput = iterateCells(input);
-
-                String[] strNums = input.split("\\s+");
-                int x = Integer.parseInt(strNums[0]);
-                int y = Integer.parseInt(strNums[1]);
-
-                if (i % 2 == 1) {
-                    // mix with incorrect data
-                    fullInput = "4 " + i + "\n" + fullInput;
-                }
-
-                tests.add(new TestCase<Clue>()
-                    .setInput(startField + "\n" + fullInput)
-                    .setAttach(new Clue(startField, x, y)));
-
-                i++;
-            }
-
-        }
-
-        return tests;
+            new TestCase<Clue>()
+                .setInput("\"X X O    \"")
+                .setAttach(new Clue(
+                    "\"X X O    \""))
+        );
     }
 
     @Override
@@ -248,32 +227,30 @@ public class TicTacToeTest extends BaseStageTest<Clue> {
 
         if (fields.size() != 2) {
             return new CheckResult(false,
-                "Can't find two fields inside output");
+                "Output should contain 2 fields, found: " + fields.size());
+        }
+
+        if (!reply.contains("Making move level \"easy\"")) {
+            return new CheckResult(false,
+                "No \"Making move level \"easy\"\" line in output");
         }
 
         TicTacToeField curr = fields.get(0);
         TicTacToeField next = fields.get(1);
 
         TicTacToeField correctCurr = new TicTacToeField(clue.input);
-        TicTacToeField correctNext = new TicTacToeField(correctCurr.field);
-
-        String[] numInputs = iterateCells(clue.x + " " + clue.y).split("\n");
-        for (String input : numInputs) {
-            String[] strNums = input.split(" ");
-            int x = Integer.parseInt(strNums[0]);
-            int y = Integer.parseInt(strNums[1]);
-            if (correctNext.field[y - 1][x - 1] == FieldState.FREE) {
-                correctNext.field[y - 1][x - 1] = FieldState.X;
-                break;
-            }
-        }
 
         if (!curr.equalTo(correctCurr)) {
             return new CheckResult(false,
                 "The first field is not equal to the input field");
         }
 
-        if (!next.equalTo(correctNext)) {
+        if (curr.equalTo(next)) {
+            return new CheckResult(false,
+                "The first field is equals to next, but should be different");
+        }
+
+        if (!curr.hasNextAs(next)) {
             return new CheckResult(false,
                 "The first field is correct, but the second is not");
         }
