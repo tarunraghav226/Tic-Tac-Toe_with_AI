@@ -7,18 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-class Attach {
-    String inputField;
-    String outField;
-
-    Attach(String inputField, String outField) {
-        this.inputField = inputField;
-        this.outField = outField;
-    }
-}
-
-
 enum FieldState {
     X, O, FREE;
 
@@ -83,23 +71,6 @@ class TicTacToeField {
             }
         }
         return improved;
-    }
-
-    boolean differByOne(TicTacToeField other) {
-        boolean haveSingleDifference = false;
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (field[i][j] != other.field[i][j]) {
-                    if (haveSingleDifference) {
-                        return false;
-                    }
-                    haveSingleDifference = true;
-                }
-            }
-        }
-
-        return haveSingleDifference;
     }
 
     boolean isCloseTo(TicTacToeField other) {
@@ -192,74 +163,110 @@ class TicTacToeField {
 
 }
 
-public class TicTacToeTest extends BaseStageTest<Attach> {
+
+class Clue {
+    int x, y;
+    String input;
+    Clue(String input, int x, int y) {
+        this.input = input;
+        this.x = x;
+        this.y = y;
+    }
+}
+
+public class TicTacToeTest extends BaseStageTest<Clue> {
     public TicTacToeTest() throws Exception {
         super(Main.class);
     }
 
-    @Override
-    public List<TestCase<Attach>> generate() {
-        return List.of(
-            new TestCase<Attach>()
-                .setInput("\"X X O    \"\n1 2")
-                .setAttach(new Attach(
-                    "\"X X O    \"",
-                     "\"X XXO    \"")),
+    // TODO: why if this field in not static then it is null, not String[]?
+    static final String[] inputs = new String[] {
+        "1 1", "1 2", "1 3",
+        "2 1", "2 2", "2 3",
+        "3 1", "3 2", "3 3"
+    };
 
-            new TestCase<Attach>()
-                .setInput("\"X X O    \"\n1 1")
-                .setAttach(new Attach(
-                    "\"X X O    \"",
-                     "\"X X O X  \"")),
-
-            new TestCase<Attach>()
-                .setInput("\"X X O    \"\n3 2")
-                .setAttach(new Attach(
-                    "\"X X O    \"",
-                     "\"X X OX   \"")),
-
-            new TestCase<Attach>()
-                .setInput("\"X X O    \"\n2 1")
-                .setAttach(new Attach(
-                    "\"X X O    \"",
-                     "\"X X O  X \"")),
-
-            new TestCase<Attach>()
-                .setInput("\" XXOO OX \"\n1 3")
-                .setAttach(new Attach(
-                    "\" XXOO OX \"",
-                     "\"XXXOO OX \"")),
-
-            new TestCase<Attach>()
-                .setInput("\" XXOO OX \"\n3 1")
-                .setAttach(new Attach(
-                    "\" XXOO OX \"",
-                     "\" XXOO OXX\"")),
-
-            new TestCase<Attach>()
-                .setInput("\" XXOO OX \"\n3 2")
-                .setAttach(new Attach(
-                    "\" XXOO OX \"",
-                     "\" XXOOXOX \""))
-
-        );
+    String iterateCells(String initial) {
+        int index = -1;
+        for (int i = 0; i < inputs.length; i++) {
+            if (initial.equals(inputs[i])) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            return "";
+        }
+        String fullInput = "";
+        for (int i = index; i < index + 9; i++) {
+            fullInput += inputs[i % inputs.length] + "\n";
+        }
+        return fullInput;
     }
 
     @Override
-    public CheckResult check(String reply, Attach clue) {
+    public List<TestCase<Clue>> generate() {
+
+        List<TestCase<Clue>> tests = new ArrayList<>();
+
+        int i = 0;
+
+        for (String startField : new String[] {
+            "\" XXOO OX \"",
+            "\"         \"",
+            "\"X X O    \""
+        }) {
+
+            for (String input : inputs) {
+                String fullInput = iterateCells(input);
+
+                String[] strNums = input.split("\\s+");
+                int x = Integer.parseInt(strNums[0]);
+                int y = Integer.parseInt(strNums[1]);
+
+                if (i % 2 == 1) {
+                    // mix with incorrect data
+                    fullInput = "4 " + i + "\n" + fullInput;
+                }
+
+                tests.add(new TestCase<Clue>()
+                    .setInput(startField + "\n" + fullInput)
+                    .setAttach(new Clue(startField, x, y)));
+
+                i++;
+            }
+
+        }
+
+        return tests;
+    }
+
+    @Override
+    public CheckResult check(String reply, Clue clue) {
 
         List<TicTacToeField> fields = TicTacToeField.parseAll(reply);
 
         if (fields.size() != 2) {
             return new CheckResult(false,
-                "You should output exactly 2 fields, found: " + fields.size());
+                "Can't find two fields inside output");
         }
 
         TicTacToeField curr = fields.get(0);
         TicTacToeField next = fields.get(1);
 
-        TicTacToeField correctCurr = new TicTacToeField(clue.inputField);
-        TicTacToeField correctNext = new TicTacToeField(clue.outField);
+        TicTacToeField correctCurr = new TicTacToeField(clue.input);
+        TicTacToeField correctNext = new TicTacToeField(correctCurr.field);
+
+        String[] numInputs = iterateCells(clue.x + " " + clue.y).split("\n");
+        for (String input : numInputs) {
+            String[] strNums = input.split(" ");
+            int x = Integer.parseInt(strNums[0]);
+            int y = Integer.parseInt(strNums[1]);
+            if (correctNext.field[y - 1][x - 1] == FieldState.FREE) {
+                correctNext.field[y - 1][x - 1] = FieldState.X;
+                break;
+            }
+        }
 
         if (!curr.equalTo(correctCurr)) {
             return new CheckResult(false,
