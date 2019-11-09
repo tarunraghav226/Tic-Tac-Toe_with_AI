@@ -117,31 +117,47 @@ public class Main {
         Main game = new Main(pattern);
         System.out.println(game.displaGame());
 
-        int c1,c2;
-        boolean flag=true;
-        while(flag) {
-            try {
-                System.out.print("Enter the coordinates: ");
-                c1 = scan.nextInt();
-                c2 = scan.nextInt();
-
-                if(c1>3 || c1<1 || c2>3||c2<1) {
-                    System.out.println("Coordinates should be from 1 to 3!");
-                    flag = true;
-                }
-                else if( game.updateState('X',c1,c2)==1){
-                    System.out.println(game.displaGame());
-                    flag=false;
-                }
-                else
-                    System.out.println("This cell is occupied! Choose another one!");
-
-            } catch (InputMismatchException e) {
-                System.out.println("You should enter numbers!");
-                scan.nextLine().trim();
-            }
-        }
+        int userMove1, userMove2;
+        System.out.println("Making move level \"easy\"");
+        game.computerMove();
         //System.out.println(game.printWinState());
         scan.close();
+    }
+
+    //method for making computer move
+    public void computerMove() {
+        int computerMove1, computerMove2;
+        boolean flag=true;
+        while(flag) {
+            computerMove1 = (int) (Math.random() * 3) + 1;
+            computerMove2 = (int) (Math.random() * 3) + 1;
+            if (computerMove1 > 3 || computerMove1 < 1 || computerMove2 > 3 || computerMove2 < 1) {
+                flag = true;
+            } else if (this.updateState('X', computerMove1, computerMove2) == 1) {
+                System.out.println(this.displaGame());
+                flag = false;
+            }
+        }
+    }
+
+    //method for user input
+    public boolean userInput(int computerMove1, int computerMove2) {
+        boolean flag = true;
+        System.out.print("Enter the coordinates: ");
+        try {
+            if (computerMove1 > 3 || computerMove1 < 1 || computerMove2 > 3 || computerMove2 < 1) {
+                System.out.println("Coordinates should be from 1 to 3!");
+                return true;
+            } else if (this.updateState('X', computerMove1, computerMove2) == 1) {
+                System.out.println(this.displaGame());
+                return false;
+            } else {
+                System.out.println("This cell is occupied! Choose another one!");
+                return true;
+            }
+            } catch (InputMismatchException e) {
+            System.out.println("You should enter numbers!");
+            return true;
+        }
     }
 }
