@@ -165,9 +165,11 @@ class TicTacToeField {
 
 
 class Clue {
-    String input;
-    Clue(String input) {
-        this.input = input;
+    int x, y;
+
+    Clue(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }
 
@@ -202,22 +204,55 @@ public class TicTacToeTest extends BaseStageTest<Clue> {
 
     @Override
     public List<TestCase<Clue>> generate() {
-        return List.of(
-            new TestCase<Clue>()
-                .setInput("\" XXOO OX \"")
-                .setAttach(new Clue(
-                    "\" XXOO OX \"")),
 
-            new TestCase<Clue>()
-                .setInput("\"         \"")
-                .setAttach(new Clue(
-                    "\"         \"")),
+        List<TestCase<Clue>> tests = new ArrayList<>();
 
-            new TestCase<Clue>()
-                .setInput("\"X X O    \"")
-                .setAttach(new Clue(
-                    "\"X X O    \""))
-        );
+        int i = 0;
+        for (String input : inputs) {
+            String fullMoveInput = iterateCells(input);
+
+            String[] strNums = input.split(" ");
+            int x = Integer.parseInt(strNums[0]);
+            int y = Integer.parseInt(strNums[1]);
+
+            if (i % 2 == 1) {
+                // mix with incorrect data
+                fullMoveInput = "4 " + i + "\n" + fullMoveInput;
+            }
+
+            String fullGameInput = "";
+            for (int j = 0; j < 9; j++) {
+                fullGameInput += fullMoveInput;
+            }
+
+            String initial;
+            if (i % 2 == 0) {
+                initial = "start user easy\n";
+            } else {
+                initial = "start easy user\n";
+            }
+
+            fullGameInput = initial + fullGameInput + "exit";
+
+            tests.add(new TestCase<Clue>()
+                    .setInput(fullGameInput));
+
+            i++;
+        }
+
+        tests.add(new TestCase<Clue>()
+                .setInput("start easy easy\nexit"));
+
+        tests.add(new TestCase<Clue>()
+                .setInput("start user user\n" +
+                        "1 1\n" +
+                        "2 2\n" +
+                        "1 2\n" +
+                        "2 1\n" +
+                        "1 3\n" +
+                        "exit"));
+
+        return tests;
     }
 
     @Override
@@ -225,34 +260,20 @@ public class TicTacToeTest extends BaseStageTest<Clue> {
 
         List<TicTacToeField> fields = TicTacToeField.parseAll(reply);
 
-        if (fields.size() != 2) {
-            return new CheckResult(false,
-                "Output should contain 2 fields, found: " + fields.size());
+        if (fields.size() == 0) {
+            return new CheckResult(false, "No fields found");
         }
 
-        if (!reply.contains("Making move level \"easy\"")) {
-            return new CheckResult(false,
-                "No \"Making move level \"easy\"\" line in output");
-        }
+        for (int i = 1; i < fields.size(); i++) {
+            TicTacToeField curr = fields.get(i - 1);
+            TicTacToeField next = fields.get(i);
 
-        TicTacToeField curr = fields.get(0);
-        TicTacToeField next = fields.get(1);
-
-        TicTacToeField correctCurr = new TicTacToeField(clue.input);
-
-        if (!curr.equalTo(correctCurr)) {
-            return new CheckResult(false,
-                "The first field is not equal to the input field");
-        }
-
-        if (curr.equalTo(next)) {
-            return new CheckResult(false,
-                "The first field is equals to next, but should be different");
-        }
-
-        if (!curr.hasNextAs(next)) {
-            return new CheckResult(false,
-                "The first field is correct, but the second is not");
+            if (!(curr.equalTo(next) || curr.hasNextAs(next))) {
+                return new CheckResult(false,
+                        "For two fields following each " +
+                                "other one is not a continuation " +
+                                "of the other.");
+            }
         }
 
         return CheckResult.TRUE;

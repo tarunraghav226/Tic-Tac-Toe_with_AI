@@ -1,43 +1,403 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-09T20:00:25" hostname="ProgrammersZone" time="0.158">
+<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-10T08:29:43" hostname="ProgrammersZone" time="0.584">
   <properties/>
-  <testcase name="start" classname="TicTacToeTest" time="0.158"/>
+  <testcase name="start" classname="TicTacToeTest" time="0.584"/>
   <system-out><![CDATA[---------
-|   X X |
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: ---------
+|       |
+|       |
+| X     |
+---------
+Making move level "easy"
+---------
+|       |
+|     O |
+| X     |
+---------
+Enter the coordinates: ---------
+|       |
+| X   O |
+| X     |
+---------
+Making move level "easy"
+---------
+|       |
+| X   O |
+| X   O |
+---------
+Enter the coordinates: ---------
+| X     |
+| X   O |
+| X   O |
+---------
+X wins
+---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: Coordinates should be from 1 to 3!
+Enter the coordinates: ---------
+|       |
+| X     |
+|       |
+---------
+Making move level "easy"
+---------
+| O     |
+| X     |
+|       |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+| O     |
+| X     |
+|   X   |
+---------
+Making move level "easy"
+---------
+| O     |
+| X   O |
+|   X   |
+---------
+Enter the coordinates: ---------
+| O     |
+| X X O |
+|   X   |
+---------
+Making move level "easy"
+---------
+| O     |
+| X X O |
+| O X   |
+---------
+Enter the coordinates: ---------
+| O X   |
+| X X O |
+| O X   |
+---------
+X wins
+---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: ---------
+| X     |
+|       |
+|       |
+---------
+Making move level "easy"
+---------
+| X     |
+|       |
+|   O   |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+| X     |
+|   X   |
+|   O   |
+---------
+Making move level "easy"
+---------
+| X     |
+|   X   |
+|   O O |
+---------
+Enter the coordinates: ---------
+| X X   |
+|   X   |
+|   O O |
+---------
+Making move level "easy"
+---------
+| X X   |
+|   X   |
+| O O O |
+---------
+O wins
+---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: Coordinates should be from 1 to 3!
+Enter the coordinates: ---------
+|       |
+|       |
+|   X   |
+---------
+Making move level "easy"
+---------
+| O     |
+|       |
+|   X   |
+---------
+Enter the coordinates: ---------
+| O     |
+|   X   |
+|   X   |
+---------
+Making move level "easy"
+---------
+| O     |
+| O X   |
+|   X   |
+---------
+Enter the coordinates: ---------
+| O X   |
+| O X   |
+|   X   |
+---------
+X wins
+---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: ---------
+|       |
+|   X   |
+|       |
+---------
+Making move level "easy"
+---------
+|   O   |
+|   X   |
+|       |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+|   O   |
+|   X   |
+|     X |
+---------
+Making move level "easy"
+---------
 | O O   |
-| O X   |
+|   X   |
+|     X |
 ---------
-Making move level "easy"
----------
+Enter the coordinates: ---------
+| O O   |
 |   X X |
-| O O X |
-| O X   |
+|     X |
 ---------
+Making move level "easy"
+---------
+| O O O |
+|   X X |
+|     X |
+---------
+O wins
 ---------
 |       |
+|       |
+|       |
+---------
+Enter the coordinates: Coordinates should be from 1 to 3!
+Enter the coordinates: ---------
+|   X   |
 |       |
 |       |
 ---------
 Making move level "easy"
 ---------
+|   X O |
+|       |
+|       |
+---------
+Enter the coordinates: ---------
+|   X O |
+|       |
+|     X |
+---------
+Making move level "easy"
+---------
+| O X O |
+|       |
+|     X |
+---------
+Enter the coordinates: ---------
+| O X O |
+|     X |
+|     X |
+---------
+Making move level "easy"
+---------
+| O X O |
+|   O X |
+|     X |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+| O X O |
+|   O X |
+| X   X |
+---------
+Making move level "easy"
+---------
+| O X O |
+| O O X |
+| X   X |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+| O X O |
+| O O X |
+| X X X |
+---------
+X wins
+---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: ---------
+|       |
+|       |
+|     X |
+---------
+Making move level "easy"
+---------
+|     O |
+|       |
+|     X |
+---------
+Enter the coordinates: ---------
+|     O |
+|     X |
+|     X |
+---------
+Making move level "easy"
+---------
+|     O |
+|     X |
+| O   X |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+|     O |
+| X   X |
+| O   X |
+---------
+Making move level "easy"
+---------
+|     O |
+| X O X |
+| O   X |
+---------
+O wins
+---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: Coordinates should be from 1 to 3!
+Enter the coordinates: ---------
 |       |
 |     X |
 |       |
 ---------
+Making move level "easy"
 ---------
+|     O |
+|     X |
+|       |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+|     O |
+|     X |
+| X     |
+---------
+Making move level "easy"
+---------
+|     O |
+|     X |
+| X O   |
+---------
+Enter the coordinates: ---------
+|     O |
 | X   X |
-|   O   |
+| X O   |
+---------
+Making move level "easy"
+---------
+| O   O |
+| X   X |
+| X O   |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+| O   O |
+| X X X |
+| X O   |
+---------
+X wins
+---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: ---------
+|     X |
+|       |
 |       |
 ---------
 Making move level "easy"
 ---------
-| X X X |
-|   O   |
+|     X |
 |       |
+|   O   |
 ---------
+Enter the coordinates: ---------
+|     X |
+|       |
+| X O   |
+---------
+Making move level "easy"
+---------
+|     X |
+|       |
+| X O O |
+---------
+Enter the coordinates: ---------
+|     X |
+| X     |
+| X O O |
+---------
+Making move level "easy"
+---------
+| O   X |
+| X     |
+| X O O |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+| O   X |
+| X X   |
+| X O O |
+---------
+X wins
 ]]></system-out>
   <system-err><![CDATA[Start test 1
 Start test 2
 Start test 3
+Start test 4
+Start test 5
+Start test 6
+Start test 7
+Start test 8
+Start test 9
 ]]></system-err>
 </testsuite>
