@@ -28,40 +28,79 @@ public class Main {
         while (flag) {
             System.out.print("Input command: ");
             userChoice = scan.nextLine().trim().split(" ", 3);
-            if (userChoice.length == 3)
+            if (userChoice.length == 3 || (userChoice.length == 1 && userChoice[0].equals("exit")))
                 flag = false;
             else
                 System.out.println("Bad parameters!");
         }
-        System.out.println(game.displaGame());
 
-        if (userChoice[1].equals("easy") && userChoice[2].equals("easy")) {
-            while (gameLoopVariable >= 0) {
-                System.out.println("Making move level \"easy\"");
-                game.computerMove('X');
+        if (userChoice[0].equals("exit"))
+            return;
+
+        /*for (String s : userChoice) {
+            System.out.println(s);
+        }*/
+
+        System.out.println(game.displaGame());
+        /*System.out.println(userChoice[2]);
+        System.out.println(userChoice[2].equals("medium"));*/
+
+        if ((userChoice[1].equals("easy") || userChoice[1].equals("medium")) && (userChoice[2].equals("easy") || userChoice[2].equals("medium"))) {
+            while (gameLoopVariable > 0) {
+
+                if (userChoice[1].equals("easy")) {
+                    System.out.println("Making move level \"easy\"");
+                    game.computerMove('X', 0);
+                } else if (userChoice[1].equals("medium")) {
+                    System.out.println("Making move level \"medium\"");
+                    game.computerMove('X', 1);
+                }
+
+
                 if (game.checkWinState('X')) {
                     System.out.println("X wins");
                     break;
                 }
+
                 gameLoopVariable--;
-                System.out.println("Making move level \"easy\"");
-                game.computerMove('O');
+
+                if (gameLoopVariable <= 0)
+                    break;
+
+                if (userChoice[2].equals("easy")) {
+                    System.out.println("Making move level \"easy\"");
+                    game.computerMove('O', 0);
+                } else if (userChoice[2].equals("medium")) {
+                    System.out.println("Making move level \"medium\"");
+                    game.computerMove('O', 1);
+                }
+
                 if (game.checkWinState('O')) {
                     System.out.println("O wins");
                     break;
                 }
                 gameLoopVariable--;
             }
-        } else if (userChoice[1].equals("user") && userChoice[2].equals("easy")) {
-            while (gameLoopVariable >= 0) {
+        } else if (userChoice[1].equals("user") && (userChoice[2].equals("easy") || userChoice[2].equals("medium"))) {
+            while (gameLoopVariable > 0) {
                 while (game.userInput('X')) ;
                 if (game.checkWinState('X')) {
                     System.out.println("X wins");
                     break;
                 }
+
                 gameLoopVariable--;
-                System.out.println("Making move level \"easy\"");
-                game.computerMove('O');
+
+                if (gameLoopVariable <= 0)
+                    break;
+
+                if (userChoice[2].equals("easy")) {
+                    System.out.println("Making move level \"easy\"");
+                    game.computerMove('O', 0);
+                } else if (userChoice[2].equals("medium")) {
+                    System.out.println("Making move level \"medium\"");
+                    game.computerMove('O', 1);
+                }
                 if (game.checkWinState('O')) {
                     System.out.println("O wins");
                     break;
@@ -69,13 +108,18 @@ public class Main {
                 gameLoopVariable--;
             }
         } else if (userChoice[1].equals("user") && userChoice[2].equals("user")) {
-            while (gameLoopVariable >= 0) {
+            while (gameLoopVariable > 0) {
                 while (game.userInput('X')) ;
                 if (game.checkWinState('X')) {
                     System.out.println("X wins");
                     break;
                 }
+
                 gameLoopVariable--;
+
+                if (gameLoopVariable <= 0)
+                    break;
+
                 while (game.userInput('O')) ;
                 if (game.checkWinState('O')) {
                     System.out.println("O wins");
@@ -83,15 +127,26 @@ public class Main {
                 }
                 gameLoopVariable--;
             }
-        } else if (userChoice[1].equals("easy") && userChoice[2].equals("user")) {
-            while (gameLoopVariable >= 0) {
-                System.out.println("Making move level \"easy\"");
-                game.computerMove('X');
+        } else if ((userChoice[1].equals("easy") || userChoice[1].equals("medium")) && userChoice[2].equals("user")) {
+            while (gameLoopVariable > 0) {
+
+                if (userChoice[1].equals("easy")) {
+                    System.out.println("Making move level \"easy\"");
+                    game.computerMove('X', 0);
+                } else if (userChoice[1].equals("medium")) {
+                    System.out.println("Making move level \"medium\"");
+                    game.computerMove('X', 1);
+                }
+
                 if (game.checkWinState('X')) {
                     System.out.println("X wins");
                     break;
                 }
                 gameLoopVariable--;
+
+                if (gameLoopVariable <= 0)
+                    break;
+
                 while (game.userInput('O')) ;
                 if (game.checkWinState('O')) {
                     System.out.println("O wins");
@@ -146,6 +201,55 @@ public class Main {
         return false;
     }
 
+    //this function is to check whether the bot can win in a single move or not
+    public boolean canIWin(char move) {
+        int[][] a = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9},
+                {1, 5, 9},
+                {3, 5, 7},
+                {1, 4, 7},
+                {2, 5, 8},
+                {3, 6, 9}
+        };
+        for (int i = 0; i < 8; i++) {
+            if (pattern.charAt(a[i][0]) == move && pattern.charAt(a[i][0]) == pattern.charAt(a[i][1]) && pattern.charAt(a[i][2]) == ' ') {
+                return this.updateState(move, a[i][2]);
+            } else if (pattern.charAt(a[i][1]) == move && pattern.charAt(a[i][1]) == pattern.charAt(a[i][2]) && pattern.charAt(a[i][0]) == ' ') {
+                return this.updateState(move, a[i][0]);
+            } else if (pattern.charAt(a[i][0]) == move && pattern.charAt(a[i][0]) == pattern.charAt(a[i][2]) && pattern.charAt(a[i][1]) == ' ') {
+                return this.updateState(move, a[i][0]);
+            }
+        }
+        return false;
+    }
+
+    //this function is to check whether the user can win in a single move or not if yes then stop the user
+    public boolean stopUserFromWin(char move) {
+        int[][] a = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9},
+                {1, 5, 9},
+                {3, 5, 7},
+                {1, 4, 7},
+                {2, 5, 8},
+                {3, 6, 9}
+        };
+        char userMove = (move == 'X') ? 'O' : 'X';
+        for (int i = 0; i < 8; i++) {
+            if (pattern.charAt(a[i][0]) == userMove && pattern.charAt(a[i][0]) == pattern.charAt(a[i][1]) && pattern.charAt(a[i][2]) == ' ') {
+                return updateState(move, a[i][2]);
+            } else if (pattern.charAt(a[i][1]) == userMove && pattern.charAt(a[i][1]) == pattern.charAt(a[i][2]) && pattern.charAt(a[i][0]) == ' ') {
+                return updateState(move, a[i][0]);
+            } else if (pattern.charAt(a[i][0]) == userMove && pattern.charAt(a[i][0]) == pattern.charAt(a[i][2]) && pattern.charAt(a[i][1]) == ' ') {
+                return updateState(move, a[i][1]);
+            }
+        }
+        return false;
+    }
+
     //this function returns the number of occurence of a character in a string
     public int numberOfOccurenceOf(char c) {
         int occurence = 0;
@@ -187,6 +291,19 @@ public class Main {
 
     }
 
+    //this function is overloaded and it adds new computer move to the game pattern
+    public boolean updateState(char choice, int moveValue) {
+        //condition for checking if the particular place is free or not for the move
+        if (pattern.charAt(moveValue) == 'X' || pattern.charAt(moveValue) == 'O')
+            return false;
+
+        //updating the game state
+        pattern = pattern.substring(1, moveValue) + choice + pattern.substring(moveValue + 1);
+        pattern = "\"" + pattern;
+        return true;
+
+    }
+
     //function to print win state of game
     public String printWinState() {
         String stateOfGame = this.checkWinState();
@@ -203,19 +320,41 @@ public class Main {
     }
 
     //method for making computer move
-    public void computerMove(char move) {
+    public void computerMove(char move, int difficulty) {
         int computerMove1, computerMove2;
         boolean flag = true;
         while (flag) {
-            computerMove1 = (int) (Math.random() * 3) + 1;
-            computerMove2 = (int) (Math.random() * 3) + 1;
-            if (computerMove1 > 3 || computerMove1 < 1 || computerMove2 > 3 || computerMove2 < 1) {
-                flag = true;
-            } else if (this.updateState(move, computerMove1, computerMove2) == 1) {
-                System.out.println(this.displaGame());
-                flag = false;
-            } else if (this.numberOfOccurenceOf(' ') == 0)
-                flag = false;
+            if (difficulty == 0) {
+                computerMove1 = (int) (Math.random() * 3) + 1;
+                computerMove2 = (int) (Math.random() * 3) + 1;
+                if (computerMove1 > 3 || computerMove1 < 1 || computerMove2 > 3 || computerMove2 < 1) {
+                    flag = true;
+                } else if (this.updateState(move, computerMove1, computerMove2) == 1) {
+                    System.out.println(this.displaGame());
+                    flag = false;
+                } else if (this.numberOfOccurenceOf(' ') == 0)
+                    flag = false;
+            } else if (difficulty == 1) {
+                //making move to win in a single move
+                if (this.canIWin(move)) {
+                    System.out.println(this.displaGame());
+                    flag = false;
+                } else if (this.stopUserFromWin(move)) {
+                    System.out.println(this.displaGame());
+                    flag = false;
+                } else {
+                    //making a random move after both cases fail
+                    computerMove1 = (int) (Math.random() * 3) + 1;
+                    computerMove2 = (int) (Math.random() * 3) + 1;
+                    if (computerMove1 > 3 || computerMove1 < 1 || computerMove2 > 3 || computerMove2 < 1) {
+                        flag = true;
+                    } else if (this.updateState(move, computerMove1, computerMove2) == 1) {
+                        System.out.println(this.displaGame());
+                        flag = false;
+                    } else if (this.numberOfOccurenceOf(' ') == 0)
+                        flag = false;
+                }
+            }
         }
     }
 
