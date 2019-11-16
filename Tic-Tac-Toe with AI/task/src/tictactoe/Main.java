@@ -21,28 +21,88 @@ public class Main {
     public static void main(String[] args) {
         String pattern = "\"         \"";
         Main game = new Main(pattern);
+        boolean flag = true;
+        String[] userChoice = {"", "", ""};
+        int gameLoopVariable = 9;
+
+        while (flag) {
+            System.out.print("Input command: ");
+            userChoice = scan.nextLine().trim().split(" ", 3);
+            if (userChoice.length == 3)
+                flag = false;
+            else
+                System.out.println("Bad parameters!");
+        }
         System.out.println(game.displaGame());
 
-        int userMove1, userMove2, gameLoopVariable = 9;
-        while (gameLoopVariable >= 0) {
-            while (game.userInput()) ;
-            if (game.checkWinState('X')) {
-                System.out.println("X wins");
-                break;
+        if (userChoice[1].equals("easy") && userChoice[2].equals("easy")) {
+            while (gameLoopVariable >= 0) {
+                System.out.println("Making move level \"easy\"");
+                game.computerMove('X');
+                if (game.checkWinState('X')) {
+                    System.out.println("X wins");
+                    break;
+                }
+                gameLoopVariable--;
+                System.out.println("Making move level \"easy\"");
+                game.computerMove('O');
+                if (game.checkWinState('O')) {
+                    System.out.println("O wins");
+                    break;
+                }
+                gameLoopVariable--;
             }
-            gameLoopVariable--;
-            System.out.println("Making move level \"easy\"");
-            game.computerMove();
-            if (game.checkWinState('O')) {
-                System.out.println("O wins");
-                break;
+        } else if (userChoice[1].equals("user") && userChoice[2].equals("easy")) {
+            while (gameLoopVariable >= 0) {
+                while (game.userInput('X')) ;
+                if (game.checkWinState('X')) {
+                    System.out.println("X wins");
+                    break;
+                }
+                gameLoopVariable--;
+                System.out.println("Making move level \"easy\"");
+                game.computerMove('O');
+                if (game.checkWinState('O')) {
+                    System.out.println("O wins");
+                    break;
+                }
+                gameLoopVariable--;
             }
-            gameLoopVariable--;
+        } else if (userChoice[1].equals("user") && userChoice[2].equals("user")) {
+            while (gameLoopVariable >= 0) {
+                while (game.userInput('X')) ;
+                if (game.checkWinState('X')) {
+                    System.out.println("X wins");
+                    break;
+                }
+                gameLoopVariable--;
+                while (game.userInput('O')) ;
+                if (game.checkWinState('O')) {
+                    System.out.println("O wins");
+                    break;
+                }
+                gameLoopVariable--;
+            }
+        } else if (userChoice[1].equals("easy") && userChoice[2].equals("user")) {
+            while (gameLoopVariable >= 0) {
+                System.out.println("Making move level \"easy\"");
+                game.computerMove('X');
+                if (game.checkWinState('X')) {
+                    System.out.println("X wins");
+                    break;
+                }
+                gameLoopVariable--;
+                while (game.userInput('O')) ;
+                if (game.checkWinState('O')) {
+                    System.out.println("O wins");
+                    break;
+                }
+                gameLoopVariable--;
+            }
         }
         if (gameLoopVariable <= 0)
             System.out.println(game.printWinState());
     }
-
     //setter for this class pattern attribute
     public void setPattern(String pattern) {
         this.pattern = pattern;
@@ -143,7 +203,7 @@ public class Main {
     }
 
     //method for making computer move
-    public void computerMove() {
+    public void computerMove(char move) {
         int computerMove1, computerMove2;
         boolean flag = true;
         while (flag) {
@@ -151,7 +211,7 @@ public class Main {
             computerMove2 = (int) (Math.random() * 3) + 1;
             if (computerMove1 > 3 || computerMove1 < 1 || computerMove2 > 3 || computerMove2 < 1) {
                 flag = true;
-            } else if (this.updateState('O', computerMove1, computerMove2) == 1) {
+            } else if (this.updateState(move, computerMove1, computerMove2) == 1) {
                 System.out.println(this.displaGame());
                 flag = false;
             } else if (this.numberOfOccurenceOf(' ') == 0)
@@ -160,7 +220,7 @@ public class Main {
     }
 
     //method for user input
-    public boolean userInput() {
+    public boolean userInput(char move) {
         int userMove1, userMove2;
         try {
             System.out.print("Enter the coordinates: ");
@@ -169,7 +229,7 @@ public class Main {
             if (userMove1 > 3 || userMove1 < 1 || userMove2 > 3 || userMove2 < 1) {
                 System.out.println("Coordinates should be from 1 to 3!");
                 return true;
-            } else if (this.updateState('X', userMove1, userMove2) == 1) {
+            } else if (this.updateState(move, userMove1, userMove2) == 1) {
                 System.out.println(this.displaGame());
                 return false;
             } else if (this.numberOfOccurenceOf(' ') == 0) {
