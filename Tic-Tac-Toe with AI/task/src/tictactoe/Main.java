@@ -1,5 +1,6 @@
 package tictactoe;
 
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,6 +9,8 @@ public class Main {
 
     //this is the pattern we will get from game state
     private String pattern;
+    //hashMap for mapping winner with points
+    private HashMap<Character, Integer> hashMap;
 
     //created a global scan
     public static Scanner scan = new Scanner(System.in);
@@ -15,6 +18,7 @@ public class Main {
     //Constructor of this class
     public Main(String pattern) {
         this.pattern = pattern;
+        this.setHashMap();
     }
 
     //main method to execute code
@@ -51,6 +55,9 @@ public class Main {
                 } else if (userChoice[1].equals("medium")) {
                     System.out.println("Making move level \"medium\"");
                     game.computerMove('X', 1);
+                } else if (userChoice[1].equals("hard")) {
+                    System.out.println("Making move level \"hard\"");
+                    game.computerMove('X', 2);
                 }
 
                 //checking if anyone has won
@@ -71,6 +78,9 @@ public class Main {
                 } else if (userChoice[2].equals("medium")) {
                     System.out.println("Making move level \"medium\"");
                     game.computerMove('O', 1);
+                } else if (userChoice[2].equals("hard")) {
+                    System.out.println("Making move level \"hard\"");
+                    game.computerMove('O', 2);
                 }
 
                 //checking if anyone has won
@@ -105,6 +115,9 @@ public class Main {
                 } else if (userChoice[2].equals("medium")) {
                     System.out.println("Making move level \"medium\"");
                     game.computerMove('O', 1);
+                } else if (userChoice[2].equals("hard")) {
+                    System.out.println("Making move level \"hard\"");
+                    game.computerMove('O', 2);
                 }
 
                 //checking if anyone has won
@@ -144,7 +157,7 @@ public class Main {
             }
         }
         //checking if the game is AI vs human
-        else if ((userChoice[1].equals("easy") || userChoice[1].equals("medium")) && userChoice[2].equals("user")) {
+        else if ((userChoice[1].equals("easy") || userChoice[1].equals("medium") || userChoice[1].equals("hard")) && userChoice[2].equals("user")) {
             while (gameLoopVariable > 0) {
 
                 //making a computer move
@@ -154,6 +167,9 @@ public class Main {
                 } else if (userChoice[1].equals("medium")) {
                     System.out.println("Making move level \"medium\"");
                     game.computerMove('X', 1);
+                } else if (userChoice[1].equals("hard")) {
+                    System.out.println("Making move level \"hard\"");
+                    game.computerMove('X', 2);
                 }
 
                 //checking if someone has won
@@ -353,7 +369,6 @@ public class Main {
         pattern = pattern.substring(1, moveValue) + choice + pattern.substring(moveValue + 1);
         pattern = "\"" + pattern;
         return true;
-
     }
 
     //function to print win state of game
@@ -407,6 +422,11 @@ public class Main {
                     } else if (this.numberOfOccurenceOf(' ') == 0)
                         flag = false;
                 }
+            } else if (difficulty == 2) {
+                System.out.println(move);
+                this.bestMove(move);
+                System.out.println(this.displaGame());
+                flag = false;
             }
         }
     }
@@ -435,6 +455,71 @@ public class Main {
             System.out.println("You should enter numbers!");
             scan.next();
             return true;
+        }
+    }
+
+    //this is the method for setting winner with points
+    private void setHashMap() {
+        hashMap = new HashMap<>();
+        hashMap.put('X', 10);
+        hashMap.put('O', -10);
+        hashMap.put('D', 0);
+    }
+
+    //this method updates pattern with as per AI requirement and also calls minimax method
+    private int updatePattern(int i, char moveToBeMaximized, int depth, boolean isMax) {
+        StringBuffer temp = new StringBuffer(pattern);
+        temp.setCharAt(i, moveToBeMaximized);
+        pattern = temp.toString();
+        int score = minimax(moveToBeMaximized, depth, isMax);
+        temp = new StringBuffer(pattern);
+        temp.setCharAt(i, ' ');
+        pattern = temp.toString();
+        return score;
+    }
+
+    //this method is for making best optimal decision by AI
+    public void bestMove(char moveToBeMaximized) {
+        int bestScore = -10000;
+        int moveI = 1;
+        for (int i = 1; i < pattern.length() - 1; i++) {
+            if (pattern.charAt(i) == ' ') {
+                int score = updatePattern(i, moveToBeMaximized, 0, false);
+                if (score > bestScore) {
+                    bestScore = score;
+                    moveI = i;
+                }
+            }
+        }
+        this.updateState(moveToBeMaximized, moveI);
+    }
+
+    //this is the minimax algorithm for implementing AI
+    private int minimax(char moveToBeMaximized, int depth, boolean isMax) {
+        StringBuffer temp;
+        char winner = this.printWinState().charAt(0);  //this statement fetches whether someone won or not
+        if (winner != 'G' && winner != ' ' && winner != 'I')       //this condition checks that if winner is G else returns score for that won
+            return this.hashMap.get(winner);
+
+        if (isMax) {               //this condition checks that if this turn is of maximizer or minimizer
+            int bestScore = -10000;
+            for (int i = 1; i < pattern.length() - 1; i++) {
+                if (pattern.charAt(i) == ' ') {
+                    int score = updatePattern(i, moveToBeMaximized, depth + 1, false);
+                    bestScore = Math.max(score, bestScore);
+                }
+            }
+            return bestScore;
+        } else {
+            char moveToBeMinimized = (moveToBeMaximized == 'X') ? 'O' : 'X';
+            int bestScore = 10000;
+            for (int i = 1; i < pattern.length() - 1; i++) {
+                if (pattern.charAt(i) == ' ') {
+                    int score = updatePattern(i, moveToBeMinimized, depth + 1, true);
+                    bestScore = Math.min(score, bestScore);
+                }
+            }
+            return bestScore;
         }
     }
 }

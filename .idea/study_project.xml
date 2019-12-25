@@ -1008,7 +1008,7 @@
                       <option name="index" value="10" />
                       <option name="name" value="Make a &quot;hard&quot; difficulty level" />
                       <option name="record" value="-1" />
-                      <option name="status" value="Unchecked" />
+                      <option name="status" value="Failed" />
                       <option name="files">
                         <map>
                           <entry key="test/TicTacToeTest.java">
