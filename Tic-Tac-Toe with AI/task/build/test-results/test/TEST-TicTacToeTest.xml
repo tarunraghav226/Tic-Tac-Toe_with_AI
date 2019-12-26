@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-16T19:47:07" hostname="ProgrammersZone" time="0.629">
+<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-26T17:39:09" hostname="ProgrammersZone" time="2.849">
   <properties/>
-  <testcase name="start" classname="TicTacToeTest" time="0.629"/>
+  <testcase name="start" classname="TicTacToeTest" time="2.849"/>
   <system-out><![CDATA[Input command: ---------
 |       |
 |       |
@@ -14,25 +14,25 @@ Enter the coordinates: ---------
 ---------
 Making move level "easy"
 ---------
-|   O   |
 |       |
-| X     |
+|       |
+| X O   |
 ---------
 Enter the coordinates: ---------
-|   O   |
+|       |
 | X     |
-| X     |
+| X O   |
 ---------
 Making move level "easy"
 ---------
-|   O   |
+|       |
+| X   O |
 | X O   |
-| X     |
 ---------
 Enter the coordinates: ---------
-| X O   |
-| X O   |
 | X     |
+| X   O |
+| X O   |
 ---------
 X wins
 Input command: Bad parameters!
@@ -43,51 +43,58 @@ Input command: ---------
 ---------
 Making move level "easy"
 ---------
+|   X   |
 |       |
 |       |
-| X     |
 ---------
 Enter the coordinates: Coordinates should be from 1 to 3!
 Enter the coordinates: ---------
+|   X   |
+| O     |
 |       |
-| O     |
-| X     |
 ---------
 Making move level "easy"
 ---------
-| X     |
+|   X   |
 | O     |
 | X     |
 ---------
-Enter the coordinates: This cell is occupied! Choose another one!
 Enter the coordinates: ---------
-| X     |
+| O X   |
 | O     |
-| X O   |
+| X     |
 ---------
 Making move level "easy"
 ---------
+| O X   |
+| O   X |
 | X     |
+---------
+Enter the coordinates: ---------
+| O X   |
 | O   X |
 | X O   |
 ---------
-Enter the coordinates: ---------
-| X     |
-| O O X |
+Making move level "easy"
+---------
+| O X   |
+| O X X |
 | X O   |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: ---------
+| O X   |
+| O X X |
+| X O O |
 ---------
 Making move level "easy"
 ---------
-| X   X |
-| O O X |
-| X O   |
+| O X X |
+| O X X |
+| X O O |
 ---------
-Enter the coordinates: ---------
-| X O X |
-| O O X |
-| X O   |
----------
-O wins
+X wins
 Input command: Bad parameters!
 Input command: ---------
 |       |
@@ -102,34 +109,34 @@ Enter the coordinates: ---------
 Making move level "medium"
 ---------
 | X     |
-| O     |
 |       |
+| O     |
 ---------
 Enter the coordinates: ---------
 | X     |
-| O     |
+|       |
+| O X   |
+---------
+Making move level "medium"
+---------
+| X   O |
+|       |
+| O X   |
+---------
+Enter the coordinates: ---------
+| X   O |
 |   X   |
----------
-Making move level "medium"
----------
-| X     |
-| O     |
-| O X   |
----------
-Enter the coordinates: ---------
-| X     |
-| O X   |
 | O X   |
 ---------
 Making move level "medium"
 ---------
-| X     |
-| O X   |
+| X   O |
+|   X   |
 | O X O |
 ---------
 Enter the coordinates: ---------
-| X X   |
-| O X   |
+| X X O |
+|   X   |
 | O X O |
 ---------
 X wins
@@ -143,43 +150,42 @@ Making move level "medium"
 ---------
 |       |
 |       |
-|     X |
+| X     |
 ---------
 Enter the coordinates: Coordinates should be from 1 to 3!
 Enter the coordinates: ---------
 |       |
 |       |
-|   O X |
+| X O   |
 ---------
 Making move level "medium"
 ---------
-|     X |
+|   X   |
 |       |
-|   O X |
+| X O   |
 ---------
 Enter the coordinates: ---------
-|     X |
+|   X   |
 |   O   |
-|   O X |
+| X O   |
 ---------
 Making move level "medium"
 ---------
 |   X X |
 |   O   |
-|   O X |
+| X O   |
 ---------
-Enter the coordinates: This cell is occupied! Choose another one!
 Enter the coordinates: This cell is occupied! Choose another one!
 Enter the coordinates: ---------
 |   X X |
-|   O O |
-|   O X |
+|   O   |
+| X O O |
 ---------
 Making move level "medium"
 ---------
 | X X X |
-|   O O |
-|   O X |
+|   O   |
+| X O O |
 ---------
 X wins
 Input command: Bad parameters!
@@ -193,171 +199,49 @@ Enter the coordinates: ---------
 |   X   |
 |       |
 ---------
-Making move level "easy"
+Making move level "hard"
 ---------
+| O     |
+|   X   |
 |       |
-|   X   |
-| O     |
 ---------
 Enter the coordinates: ---------
-|   X   |
-|   X   |
-| O     |
----------
-Making move level "easy"
----------
-|   X   |
-|   X   |
-| O O   |
----------
-Enter the coordinates: ---------
-|   X   |
-|   X   |
-| O O X |
----------
-Making move level "easy"
----------
-|   X   |
 | O X   |
-| O O X |
----------
-Enter the coordinates: ---------
 |   X   |
-| O X X |
-| O O X |
----------
-Making move level "easy"
----------
-|   X O |
-| O X X |
-| O O X |
----------
-Enter the coordinates: This cell is occupied! Choose another one!
-Enter the coordinates: This cell is occupied! Choose another one!
-Enter the coordinates: This cell is occupied! Choose another one!
-Enter the coordinates: ---------
-| X X O |
-| O X X |
-| O O X |
----------
-X wins
-Input command: Bad parameters!
-Input command: ---------
-|       |
-|       |
 |       |
 ---------
-Making move level "easy"
+Making move level "hard"
 ---------
-|     X |
-|       |
-|       |
----------
-Enter the coordinates: Coordinates should be from 1 to 3!
-Enter the coordinates: ---------
-|   O X |
-|       |
-|       |
----------
-Making move level "easy"
----------
-|   O X |
-|       |
-| X     |
+| O X   |
+|   X   |
+|   O   |
 ---------
 Enter the coordinates: ---------
+| O X   |
+|   X   |
 |   O X |
-|       |
-| X   O |
 ---------
-Making move level "easy"
+Making move level "hard"
 ---------
-|   O X |
-|       |
-| X X O |
----------
-Enter the coordinates: ---------
-|   O X |
-|     O |
-| X X O |
----------
-Making move level "easy"
----------
-| X O X |
-|     O |
-| X X O |
----------
-Enter the coordinates: This cell is occupied! Choose another one!
-Enter the coordinates: This cell is occupied! Choose another one!
-Enter the coordinates: ---------
-| X O X |
-| O   O |
-| X X O |
----------
-Making move level "easy"
----------
-| X O X |
 | O X O |
-| X X O |
----------
-X wins
-Input command: Bad parameters!
-Input command: ---------
-|       |
-|       |
-|       |
----------
-Enter the coordinates: ---------
-|       |
-|       |
-|     X |
----------
-Making move level "medium"
----------
-|     O |
-|       |
-|     X |
----------
-Enter the coordinates: ---------
-|     O |
-|     X |
-|     X |
----------
-Making move level "medium"
----------
-|     O |
-|     X |
+|   X   |
 |   O X |
 ---------
-Enter the coordinates: This cell is occupied! Choose another one!
 Enter the coordinates: ---------
-|     O |
-|     X |
-| X O X |
+| O X O |
+|   X X |
+|   O X |
 ---------
-Making move level "medium"
+Making move level "hard"
 ---------
-| O   O |
-|     X |
-| X O X |
+| O X O |
+| O X X |
+|   O X |
 ---------
-Enter the coordinates: ---------
-| O   O |
-| X   X |
-| X O X |
----------
-Making move level "medium"
----------
-| O   O |
-| X O X |
-| X O X |
----------
-Enter the coordinates: This cell is occupied! Choose another one!
-Enter the coordinates: This cell is occupied! Choose another one!
 Enter the coordinates: This cell is occupied! Choose another one!
 Enter the coordinates: ---------
 | O X O |
-| X O X |
+| O X X |
 | X O X |
 ---------
 Draw
@@ -367,46 +251,127 @@ Input command: ---------
 |       |
 |       |
 ---------
-Making move level "medium"
+Making move level "hard"
 ---------
 |       |
-|     X |
+|   X   |
 |       |
 ---------
 Enter the coordinates: Coordinates should be from 1 to 3!
+Enter the coordinates: ---------
+|   O   |
+|   X   |
+|       |
+---------
+Making move level "hard"
+---------
+| X O   |
+|   X   |
+|       |
+---------
+Enter the coordinates: ---------
+| X O   |
+|   X   |
+|     O |
+---------
+Making move level "hard"
+---------
+| X O   |
+| X X   |
+|     O |
+---------
+Enter the coordinates: ---------
+| X O   |
+| X X O |
+|     O |
+---------
+Making move level "hard"
+---------
+| X O   |
+| X X O |
+| X   O |
+---------
+X wins
+Input command: Bad parameters!
+Input command: ---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: ---------
+|       |
+|       |
+|     X |
+---------
+Making move level "easy"
+---------
+|       |
+|       |
+|   O X |
+---------
+Enter the coordinates: ---------
+|       |
+|     X |
+|   O X |
+---------
+Making move level "easy"
+---------
+|       |
+|   O X |
+|   O X |
+---------
+Enter the coordinates: ---------
+|     X |
+|   O X |
+|   O X |
+---------
+X wins
+Input command: Bad parameters!
+Input command: ---------
+|       |
+|       |
+|       |
+---------
+Making move level "easy"
+---------
+|     X |
+|       |
+|       |
+---------
+Enter the coordinates: Coordinates should be from 1 to 3!
+Enter the coordinates: ---------
+|     X |
+|     O |
+|       |
+---------
+Making move level "easy"
+---------
+|     X |
+|   X O |
+|       |
+---------
 Enter the coordinates: This cell is occupied! Choose another one!
 Enter the coordinates: ---------
-|     O |
 |     X |
-|       |
----------
-Making move level "medium"
----------
 |   X O |
-|     X |
-|       |
----------
-Enter the coordinates: ---------
-|   X O |
-|     X |
 | O     |
 ---------
-Making move level "medium"
+Making move level "easy"
 ---------
-|   X O |
 |   X X |
+|   X O |
 | O     |
 ---------
 Enter the coordinates: ---------
-|   X O |
-| O X X |
+|   X X |
+| O X O |
 | O     |
 ---------
-Making move level "medium"
+Making move level "easy"
 ---------
-|   X O |
-| O X X |
-| O X   |
+| X X X |
+| O X O |
+| O     |
 ---------
 X wins
 Input command: Bad parameters!
@@ -420,156 +385,204 @@ Enter the coordinates: ---------
 |       |
 |       |
 ---------
-Making move level "easy"
+Making move level "medium"
 ---------
 |     X |
-| O     |
 |       |
+|   O   |
 ---------
 Enter the coordinates: ---------
 |     X |
-| O     |
-| X     |
+|       |
+| X O   |
+---------
+Making move level "medium"
+---------
+|     X |
+|   O   |
+| X O   |
+---------
+Enter the coordinates: ---------
+|     X |
+| X O   |
+| X O   |
+---------
+Making move level "medium"
+---------
+|   O X |
+| X O   |
+| X O   |
+---------
+O wins
+Input command: Bad parameters!
+Input command: ---------
+|       |
+|       |
+|       |
+---------
+Making move level "easy"
+---------
+|       |
+|       |
+|     X |
+---------
+Making move level "easy"
+---------
+|       |
+|       |
+| O   X |
+---------
+Making move level "easy"
+---------
+|       |
+|       |
+| O X X |
+---------
+Making move level "easy"
+---------
+|       |
+|     O |
+| O X X |
+---------
+Making move level "easy"
+---------
+|       |
+|   X O |
+| O X X |
+---------
+Making move level "easy"
+---------
+|   O   |
+|   X O |
+| O X X |
 ---------
 Making move level "easy"
 ---------
 |   O X |
-| O     |
-| X     |
+|   X O |
+| O X X |
 ---------
-Enter the coordinates: This cell is occupied! Choose another one!
-Enter the coordinates: ---------
-| X O X |
-| O     |
-| X     |
+Making move level "easy"
+---------
+|   O X |
+| O X O |
+| O X X |
 ---------
 Making move level "easy"
 ---------
 | X O X |
-| O   O |
-| X     |
+| O X O |
+| O X X |
 ---------
-Enter the coordinates: ---------
-| X O X |
-| O   O |
-| X X   |
----------
-Making move level "easy"
----------
-| X O X |
-| O O O |
-| X X   |
----------
-O wins
-Input command: Bad parameters!
+X wins
 Input command: ---------
 |       |
 |       |
 |       |
 ---------
-Making move level "easy"
+Making move level "medium"
 ---------
 | X     |
 |       |
 |       |
 ---------
-Making move level "easy"
+Making move level "medium"
 ---------
-| X   O |
-|       |
-|       |
----------
-Making move level "easy"
----------
-| X X O |
-|       |
-|       |
----------
-Making move level "easy"
----------
-| X X O |
+| X     |
 |       |
 |   O   |
 ---------
-Making move level "easy"
+Making move level "medium"
 ---------
-| X X O |
+| X   X |
+|       |
+|   O   |
+---------
+Making move level "medium"
+---------
+| X O X |
+|       |
+|   O   |
+---------
+Making move level "medium"
+---------
+| X O X |
 |   X   |
 |   O   |
 ---------
-Making move level "easy"
+Making move level "medium"
 ---------
-| X X O |
+| X O X |
 |   X   |
 |   O O |
 ---------
-Making move level "easy"
+Making move level "medium"
 ---------
-| X X O |
+| X O X |
+|   X   |
+| X O O |
+---------
+X wins
+Input command: ---------
+|       |
+|       |
+|       |
+---------
+Making move level "hard"
+---------
+|       |
+|   X   |
+|       |
+---------
+Making move level "hard"
+---------
+| O     |
+|   X   |
+|       |
+---------
+Making move level "hard"
+---------
+| O X   |
+|   X   |
+|       |
+---------
+Making move level "hard"
+---------
+| O X   |
+|   X   |
+|   O   |
+---------
+Making move level "hard"
+---------
+| O X   |
 | X X   |
-|   O O |
+|   O   |
 ---------
-Making move level "easy"
+Making move level "hard"
 ---------
+| O X   |
 | X X O |
+|   O   |
+---------
+Making move level "hard"
+---------
+| O X   |
 | X X O |
-|   O O |
+|   O X |
 ---------
-O wins
-Input command: ---------
-|       |
-|       |
-|       |
+Making move level "hard"
 ---------
-Making move level "medium"
+| O X O |
+| X X O |
+|   O X |
 ---------
-|     X |
-|       |
-|       |
+Making move level "hard"
 ---------
-Making move level "medium"
+| O X O |
+| X X O |
+| X O X |
 ---------
-|     X |
-| O     |
-|       |
----------
-Making move level "medium"
----------
-|   X X |
-| O     |
-|       |
----------
-Making move level "medium"
----------
-| O X X |
-| O     |
-|       |
----------
-Making move level "medium"
----------
-| O X X |
-| O     |
-| X     |
----------
-Making move level "medium"
----------
-| O X X |
-| O O   |
-| X     |
----------
-Making move level "medium"
----------
-| O X X |
-| O O X |
-| X     |
----------
-Making move level "medium"
----------
-| O X X |
-| O O X |
-| X   O |
----------
-O wins
+Draw
 Input command: ---------
 |       |
 |       |
@@ -579,54 +592,42 @@ Making move level "medium"
 ---------
 |       |
 |       |
-| X     |
----------
-Making move level "easy"
----------
-|       |
-| O     |
-| X     |
----------
-Making move level "medium"
----------
-|       |
-| O   X |
-| X     |
----------
-Making move level "easy"
----------
-|       |
-| O   X |
-| X   O |
----------
-Making move level "medium"
----------
 |   X   |
-| O   X |
-| X   O |
 ---------
 Making move level "easy"
 ---------
-|   X O |
-| O   X |
-| X   O |
+| O     |
+|       |
+|   X   |
 ---------
 Making move level "medium"
 ---------
-|   X O |
-| O X X |
-| X   O |
+| O   X |
+|       |
+|   X   |
 ---------
 Making move level "easy"
 ---------
-| O X O |
-| O X X |
-| X   O |
+| O   X |
+|       |
+|   X O |
 ---------
 Making move level "medium"
 ---------
-| O X O |
-| O X X |
+| O   X |
+|   X   |
+|   X O |
+---------
+Making move level "easy"
+---------
+| O   X |
+| O X   |
+|   X O |
+---------
+Making move level "medium"
+---------
+| O   X |
+| O X   |
 | X X O |
 ---------
 X wins
@@ -644,46 +645,250 @@ Making move level "easy"
 Making move level "medium"
 ---------
 |     X |
-|     O |
+| O     |
 |       |
 ---------
 Making move level "easy"
 ---------
 | X   X |
-|     O |
+| O     |
 |       |
 ---------
 Making move level "medium"
 ---------
 | X O X |
-|     O |
+| O     |
 |       |
 ---------
 Making move level "easy"
 ---------
 | X O X |
+| O   X |
+|       |
+---------
+Making move level "medium"
+---------
+| X O X |
+| O   X |
 |     O |
+---------
+Making move level "easy"
+---------
+| X O X |
+| O   X |
+|   X O |
+---------
+Making move level "medium"
+---------
+| X O X |
+| O   X |
+| O X O |
+---------
+Making move level "easy"
+---------
+| X O X |
+| O X X |
+| O X O |
+---------
+Draw
+Input command: ---------
+|       |
+|       |
+|       |
+---------
+Making move level "medium"
+---------
+|       |
+|   X   |
+|       |
+---------
+Making move level "hard"
+---------
+| O     |
+|   X   |
+|       |
+---------
+Making move level "medium"
+---------
+| O   X |
+|   X   |
+|       |
+---------
+Making move level "hard"
+---------
+| O   X |
+|   X   |
+| O     |
+---------
+Making move level "medium"
+---------
+| O   X |
+| X X   |
+| O     |
+---------
+Making move level "hard"
+---------
+| O   X |
+| X X O |
+| O     |
+---------
+Making move level "medium"
+---------
+| O X X |
+| X X O |
+| O     |
+---------
+Making move level "hard"
+---------
+| O X X |
+| X X O |
+| O O   |
+---------
+Making move level "medium"
+---------
+| O X X |
+| X X O |
+| O O X |
+---------
+Draw
+Input command: ---------
+|       |
+|       |
+|       |
+---------
+Making move level "hard"
+---------
+|       |
+|   X   |
+|       |
+---------
+Making move level "medium"
+---------
+|       |
+|   X   |
+| O     |
+---------
+Making move level "hard"
+---------
 | X     |
+|   X   |
+| O     |
+---------
+Making move level "medium"
+---------
+| X     |
+|   X   |
+| O   O |
+---------
+Making move level "hard"
+---------
+| X     |
+|   X   |
+| O X O |
+---------
+Making move level "medium"
+---------
+| X O   |
+|   X   |
+| O X O |
+---------
+Making move level "hard"
+---------
+| X O X |
+|   X   |
+| O X O |
 ---------
 Making move level "medium"
 ---------
 | X O X |
-|   O O |
-| X     |
+|   X O |
+| O X O |
+---------
+Making move level "hard"
+---------
+| X O X |
+| X X O |
+| O X O |
+---------
+Draw
+Input command: ---------
+|       |
+|       |
+|       |
 ---------
 Making move level "easy"
 ---------
-| X O X |
-|   O O |
-| X   X |
+| X     |
+|       |
+|       |
 ---------
-Making move level "medium"
+Making move level "hard"
 ---------
+| X     |
+|   O   |
+|       |
+---------
+Making move level "easy"
+---------
+| X     |
+| X O   |
+|       |
+---------
+Making move level "hard"
+---------
+| X     |
+| X O   |
+| O     |
+---------
+Making move level "easy"
+---------
+| X     |
 | X O X |
-| O O O |
-| X   X |
+| O     |
+---------
+Making move level "hard"
+---------
+| X   O |
+| X O X |
+| O     |
 ---------
 O wins
+Input command: ---------
+|       |
+|       |
+|       |
+---------
+Making move level "hard"
+---------
+|       |
+|   X   |
+|       |
+---------
+Making move level "easy"
+---------
+|       |
+|   X O |
+|       |
+---------
+Making move level "hard"
+---------
+| X     |
+|   X O |
+|       |
+---------
+Making move level "easy"
+---------
+| X     |
+|   X O |
+| O     |
+---------
+Making move level "hard"
+---------
+| X     |
+|   X O |
+| O   X |
+---------
+X wins
 Input command: ---------
 |       |
 |       |
@@ -730,5 +935,10 @@ Start test 11
 Start test 12
 Start test 13
 Start test 14
+Start test 15
+Start test 16
+Start test 17
+Start test 18
+Start test 19
 ]]></system-err>
 </testsuite>

@@ -18,7 +18,6 @@ public class Main {
     //Constructor of this class
     public Main(String pattern) {
         this.pattern = pattern;
-        this.setHashMap();
     }
 
     //main method to execute code
@@ -423,7 +422,6 @@ public class Main {
                         flag = false;
                 }
             } else if (difficulty == 2) {
-                System.out.println(move);
                 this.bestMove(move);
                 System.out.println(this.displaGame());
                 flag = false;
@@ -459,10 +457,11 @@ public class Main {
     }
 
     //this is the method for setting winner with points
-    private void setHashMap() {
+    private void setHashMap(char moveToBeMaximized) {
+        char moveToBeMinimized = (moveToBeMaximized == 'X') ? 'O' : 'X';
         hashMap = new HashMap<>();
-        hashMap.put('X', 10);
-        hashMap.put('O', -10);
+        hashMap.put(moveToBeMaximized, 10);
+        hashMap.put(moveToBeMinimized, -10);
         hashMap.put('D', 0);
     }
 
@@ -480,6 +479,7 @@ public class Main {
 
     //this method is for making best optimal decision by AI
     public void bestMove(char moveToBeMaximized) {
+        this.setHashMap(moveToBeMaximized);
         int bestScore = -10000;
         int moveI = 1;
         for (int i = 1; i < pattern.length() - 1; i++) {
@@ -499,7 +499,7 @@ public class Main {
         StringBuffer temp;
         char winner = this.printWinState().charAt(0);  //this statement fetches whether someone won or not
         if (winner != 'G' && winner != ' ' && winner != 'I')       //this condition checks that if winner is G else returns score for that won
-            return this.hashMap.get(winner);
+            return this.hashMap.get(winner) - depth;
 
         if (isMax) {               //this condition checks that if this turn is of maximizer or minimizer
             int bestScore = -10000;
